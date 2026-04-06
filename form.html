@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CBD — WhatsApp Booking Confirmation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0f2f5;
+        color: #1a1a1a;
+        min-height: 100vh;
+        padding: 24px 12px;
+      }
+
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      .header {
+        background: #1d9e75;
+        color: #fff;
+        border-radius: 12px 12px 0 0;
+        padding: 24px 28px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .logo {
+        width: 52px;
+        height: 52px;
+        background: #fff;
+        color: #1d9e75;
+        font-size: 28px;
+        font-weight: 800;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .header-text h1 {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .header-text p {
+        font-size: 13px;
+        opacity: 0.85;
+        margin-top: 2px;
+      }
+
+      /* Status indicator */
+      .status-bar {
+        background: #fff;
+        padding: 10px 28px;
+        border-bottom: 1px solid #e8e8e8;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: #666;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #f0ad4e;
+        transition: background 0.3s;
+      }
+
+      .status-dot.online {
+        background: #28a745;
+      }
+      .status-dot.offline {
+        background: #f0ad4e;
+      }
+
+      /* Card body */
+      .card {
+        background: #fff;
+        border-radius: 0 0 12px 12px;
+        padding: 28px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      }
+
+      /* Sections */
+      .section-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1d9e75;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 24px 0 12px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #e8f5ef;
+      }
+
+      .section-title:first-child {
+        margin-top: 0;
+      }
+
+      /* Form grid */
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+
+      .form-group label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      .form-group input,
+      .form-group select {
+        padding: 10px 12px;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #1a1a1a;
+        transition: border-color 0.2s;
+        background: #fff;
+        width: 100%;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #1d9e75;
+        box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1);
+      }
+
+      .phone-wrapper {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .phone-prefix {
+        background: #f0f2f5;
+        border: 1.5px solid #ddd;
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        padding: 10px 10px;
+        font-size: 14px;
+        color: #555;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+      }
+
+      .phone-wrapper input {
+        border-radius: 0 8px 8px 0;
+      }
+
+      /* Preview */
+      .preview-section {
+        margin-top: 28px;
+      }
+
+      .preview-label {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1d9e75;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #e8f5ef;
+      }
+
+      .preview-box {
+        background: #e8f5ef;
+        border: 1px solid #c8e6d8;
+        border-radius: 10px;
+        padding: 18px 20px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-word;
+        color: #1a1a1a;
+        max-height: 420px;
+        overflow-y: auto;
+      }
+
+      /* Buttons */
+      .btn-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 13px 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .btn-send {
+        background: #1d9e75;
+        color: #fff;
+      }
+
+      .btn-send:hover {
+        background: #178a66;
+      }
+      .btn-send:disabled {
+        background: #a0d4c1;
+        cursor: not-allowed;
+      }
+
+      .btn-copy {
+        background: #f0f2f5;
+        color: #333;
+        border: 1.5px solid #ddd;
+      }
+
+      .btn-copy:hover {
+        background: #e4e6e9;
+      }
+
+      /* Spinner */
+      .spinner {
+        width: 18px;
+        height: 18px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        display: none;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Toast */
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 14px 24px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(-12px);
+        transition: all 0.3s ease;
+        max-width: 380px;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .toast.success {
+        background: #28a745;
+      }
+      .toast.error {
+        background: #dc3545;
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .btn-row {
+          flex-direction: column;
+        }
+        .header {
+          padding: 18px 20px;
+        }
+        .card {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <div class="logo">C</div>
+        <div class="header-text">
+          <h1>Chaitra Builders &amp; Developers</h1>
+          <p>WhatsApp Booking Confirmation Sender</p>
+        </div>
+      </div>
+
+      <!-- Status bar -->
+      <div class="status-bar">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText">Checking backend...</span>
+      </div>
+
+      <!-- Form card -->
+      <div class="card">
+        <form id="bookingForm" autocomplete="off">
+          <!-- Section 1: Customer Info -->
+          <div class="section-title">Customer Info</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Customer Name *</label>
+              <input type="text" id="customer_name" required />
+            </div>
+            <div class="form-group">
+              <label>Booked Date *</label>
+              <input
+                type="text"
+                id="booked_date"
+                placeholder="DD/MM/YYYY"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Number *</label>
+              <div class="phone-wrapper">
+                <span class="phone-prefix">+91</span>
+                <input
+                  type="tel"
+                  id="phone"
+                  maxlength="10"
+                  pattern="[0-9]{10}"
+                  placeholder="10-digit number"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Mail ID</label>
+              <input type="text" id="mail_id" placeholder="-" />
+            </div>
+          </div>
+
+          <!-- Section 2: Plot Details -->
+          <div class="section-title">Plot Details</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Plot No *</label>
+              <input type="text" id="plot_no" required />
+            </div>
+            <div class="form-group">
+              <label>Sqft *</label>
+              <input type="text" id="sqft" required />
+            </div>
+            <div class="form-group">
+              <label>Facing *</label>
+              <select id="facing" required>
+                <option value="">— Select —</option>
+                <option value="EAST">EAST</option>
+                <option value="WEST">WEST</option>
+                <option value="NORTH">NORTH</option>
+                <option value="SOUTH">SOUTH</option>
+                <option value="NORTH-EAST">NORTH-EAST</option>
+                <option value="NORTH-WEST">NORTH-WEST</option>
+                <option value="SOUTH-EAST">SOUTH-EAST</option>
+                <option value="SOUTH-WEST">SOUTH-WEST</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Section 3: Pricing -->
+          <div class="section-title">Pricing</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Actual Price ₹ *</label>
+              <input type="text" id="actual_price" required />
+            </div>
+            <div class="form-group">
+              <label>Closing Price per Sqft ₹ *</label>
+              <input type="text" id="closing_price" required />
+            </div>
+            <div class="form-group">
+              <label>Total Price ₹ *</label>
+              <input type="text" id="total_price" required />
+            </div>
+            <div class="form-group">
+              <label>Paid Amount ₹ *</label>
+              <input type="text" id="paid_amount" required />
+            </div>
+            <div class="form-group">
+              <label>Balance Amount ₹ *</label>
+              <input type="text" id="balance_amount" required />
+            </div>
+          </div>
+
+          <!-- Section 4: Offer & Registration -->
+          <div class="section-title">Offer &amp; Registration</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Offer Details</label>
+              <input type="text" id="offer" placeholder="-" />
+            </div>
+            <div class="form-group">
+              <label>Registration Slot 1</label>
+              <input type="text" id="reg_slot_1" placeholder="DD/MM/YYYY" />
+            </div>
+            <div class="form-group">
+              <label>Registration Slot 2 (optional)</label>
+              <input type="text" id="reg_slot_2" placeholder="DD/MM/YYYY" />
+            </div>
+            <div class="form-group">
+              <label>Balance Due Date</label>
+              <input
+                type="text"
+                id="balance_due_date"
+                placeholder="DD/MM/YYYY"
+              />
+            </div>
+            <div class="form-group">
+              <label>Feedback (optional)</label>
+              <input type="text" id="feedback" placeholder="-" />
+            </div>
+          </div>
+
+          <!-- Message Preview -->
+          <div class="preview-section">
+            <div class="preview-label">Message Preview</div>
+            <div class="preview-box" id="previewBox">
+              Fill in the fields above to see the message preview...
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="btn-row">
+            <button type="submit" class="btn btn-send" id="sendBtn">
+              <span id="sendBtnText">Send via WhatsApp</span>
+              <div class="spinner" id="sendSpinner"></div>
+            </button>
+            <button type="button" class="btn btn-copy" id="copyBtn">
+              📋 Copy Message
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+      (function () {
+        const API_BASE = "http://localhost:8000";
+
+        // Field IDs used in the form
+        const FIELD_IDS = [
+          "customer_name",
+          "booked_date",
+          "phone",
+          "mail_id",
+          "plot_no",
+          "sqft",
+          "facing",
+          "actual_price",
+          "closing_price",
+          "total_price",
+          "paid_amount",
+          "balance_amount",
+          "offer",
+          "reg_slot_1",
+          "reg_slot_2",
+          "balance_due_date",
+          "feedback",
+        ];
+
+        // Elements
+        const form = document.getElementById("bookingForm");
+        const previewBox = document.getElementById("previewBox");
+        const sendBtn = document.getElementById("sendBtn");
+        const sendBtnText = document.getElementById("sendBtnText");
+        const sendSpinner = document.getElementById("sendSpinner");
+        const copyBtn = document.getElementById("copyBtn");
+        const statusDot = document.getElementById("statusDot");
+        const statusText = document.getElementById("statusText");
+        const toast = document.getElementById("toast");
+
+        // --- Helper functions ---
+
+        function val(id) {
+          var el = document.getElementById(id);
+          if (!el) return "";
+          var v = el.value.trim();
+          return v;
+        }
+
+        function valOr(id, defaultVal) {
+          var v = val(id);
+          return v === "" ? defaultVal || "-" : v;
+        }
+
+        function buildMessage() {
+          var customerName = valOr("customer_name");
+          var bookedDate = valOr("booked_date");
+          var phone = valOr("phone");
+          var mailId = valOr("mail_id");
+          var plotNo = valOr("plot_no");
+          var sqft = valOr("sqft");
+          var facing = valOr("facing");
+          var actualPrice = valOr("actual_price");
+          var closingPrice = valOr("closing_price");
+          var totalPrice = valOr("total_price");
+          var paidAmount = valOr("paid_amount");
+          var balanceAmount = valOr("balance_amount");
+          var offer = valOr("offer");
+          var regSlot1 = val("reg_slot_1");
+          var regSlot2 = val("reg_slot_2");
+          var balanceDueDate = val("balance_due_date");
+          var feedback = valOr("feedback");
+
+          // Registration line
+          var regLine;
+          if (regSlot1 && regSlot2) {
+            regLine = regSlot1 + " & " + regSlot2;
+          } else if (regSlot1) {
+            regLine = regSlot1;
+          } else {
+            regLine = "-";
+          }
+
+          // Balance update line
+          var balanceUpdate;
+          if (balanceDueDate) {
+            balanceUpdate =
+              "THIS IS TO INFORMING YOU REMAINING BALANCE AMOUNT SHOULD CLEAR ON OR BEFORE " +
+              balanceDueDate +
+              " TO PROCESS REGISTRATION WORKS.";
+          } else {
+            balanceUpdate = "-";
+          }
+
+          return (
+            "*WELCOME TO CBD FAMILY.*\n" +
+            "THANK YOU FOR CHOOSING US.\n" +
+            "BELOW ARE YOUR BOOKING DETAILS.\n" +
+            "\n" +
+            "CUSTOMER NAME :- " +
+            customerName +
+            "\n" +
+            "BOOKED DATE :- " +
+            bookedDate +
+            "\n" +
+            "CONTACT :- " +
+            phone +
+            "\n" +
+            "MAIL ID :- " +
+            mailId +
+            "\n" +
+            "PLOT NO :- " +
+            plotNo +
+            "\n" +
+            "SQFT :- " +
+            sqft +
+            "\n" +
+            "FACING :- " +
+            facing +
+            "\n" +
+            "ACTUAL PRICE :- \u20b9" +
+            actualPrice +
+            "\n" +
+            "CLOSING PRICE IN SQFT :- \u20b9" +
+            closingPrice +
+            "/-\n" +
+            "TOTAL PRICE :- \u20b9" +
+            totalPrice +
+            "\n" +
+            "PAID AMOUNT :- \u20b9" +
+            paidAmount +
+            "\n" +
+            "BALANCE AMOUNT :- " +
+            balanceAmount +
+            "\n" +
+            "OFFER :- " +
+            offer +
+            "\n" +
+            "REGISTRATION SLOT :- " +
+            regLine +
+            "\n" +
+            "BALANCE AMOUNT UPDATE :- " +
+            balanceUpdate +
+            "\n" +
+            "FEEDBACK :- " +
+            feedback +
+            "\n" +
+            "\n" +
+            "https://whatsapp.com/channel/0029Vax9QUa1CYoIwIGu6D2V\n" +
+            "\n" +
+            "REGARDS\n" +
+            "CHAITRA BUILDERS AND DEVELOPERS"
+          );
+        }
+
+        function updatePreview() {
+          previewBox.textContent = buildMessage();
+        }
+
+        function showToast(message, type) {
+          toast.textContent = message;
+          toast.className = "toast " + type + " show";
+          setTimeout(function () {
+            toast.className = "toast";
+          }, 5000);
+        }
+
+        function getFormData() {
+          var data = {};
+          FIELD_IDS.forEach(function (id) {
+            data[id] = val(id);
+          });
+          // Set defaults for optional fields that should be "-" when empty
+          if (!data.mail_id) data.mail_id = "-";
+          if (!data.offer) data.offer = "-";
+          if (!data.feedback) data.feedback = "-";
+          return data;
+        }
+
+        function setLoading(loading) {
+          if (loading) {
+            sendBtn.disabled = true;
+            sendBtnText.textContent = "Sending...";
+            sendSpinner.style.display = "block";
+          } else {
+            sendBtn.disabled = false;
+            sendBtnText.textContent = "Send via WhatsApp";
+            sendSpinner.style.display = "none";
+          }
+        }
+
+        // --- Health check ---
+
+        function checkHealth() {
+          fetch(API_BASE + "/health")
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (data) {
+              if (data.status === "ok") {
+                statusDot.className = "status-dot online";
+                statusText.textContent = "Backend online (localhost:8000)";
+              } else {
+                statusDot.className = "status-dot offline";
+                statusText.textContent = "Backend not responding";
+              }
+            })
+            .catch(function () {
+              statusDot.className = "status-dot offline";
+              statusText.textContent = "Backend offline — start api.py first";
+            });
+        }
+
+        // Check health on load and every 10 seconds
+        checkHealth();
+        setInterval(checkHealth, 10000);
+
+        // --- Live preview ---
+
+        FIELD_IDS.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) {
+            el.addEventListener("input", updatePreview);
+            el.addEventListener("change", updatePreview);
+          }
+        });
+
+        // --- Phone validation ---
+
+        function isPhoneValid() {
+          var phone = val("phone");
+          return /^[0-9]{10}$/.test(phone);
+        }
+
+        // --- Form submit ---
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          if (!isPhoneValid()) {
+            showToast("Phone number must be exactly 10 digits.", "error");
+            return;
+          }
+
+          var data = getFormData();
+          setLoading(true);
+
+          fetch(API_BASE + "/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          })
+            .then(function (res) {
+              if (!res.ok) {
+                return res.json().then(function (err) {
+                  throw new Error(err.detail || "Server error");
+                });
+              }
+              return res.json();
+            })
+            .then(function (result) {
+              setLoading(false);
+              showToast(
+                "Message sent to " + data.phone + " successfully!",
+                "success",
+              );
+            })
+            .catch(function (err) {
+              setLoading(false);
+              showToast("Error: " + err.message, "error");
+            });
+        });
+
+        // --- Copy button ---
+
+        copyBtn.addEventListener("click", function () {
+          var msg = buildMessage();
+          navigator.clipboard
+            .writeText(msg)
+            .then(function () {
+              copyBtn.textContent = "✅ Copied!";
+              setTimeout(function () {
+                copyBtn.textContent = "📋 Copy Message";
+              }, 2000);
+            })
+            .catch(function () {
+              // Fallback for file:// protocol where clipboard API may not work
+              var textarea = document.createElement("textarea");
+              textarea.value = msg;
+              textarea.style.position = "fixed";
+              textarea.style.opacity = "0";
+              document.body.appendChild(textarea);
+              textarea.select();
+              try {
+                document.execCommand("copy");
+                copyBtn.textContent = "✅ Copied!";
+                setTimeout(function () {
+                  copyBtn.textContent = "📋 Copy Message";
+                }, 2000);
+              } catch (ex) {
+                showToast("Failed to copy to clipboard.", "error");
+              }
+              document.body.removeChild(textarea);
+            });
+        });
+
+        // Initial preview
+        updatePreview();
+      })();
+    </script>
+  </body>
+</html>
