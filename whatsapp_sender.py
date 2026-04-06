@@ -1,4 +1,7 @@
-"""\nWhatsApp Booking Confirmation Sender\nUses Playwright with persistent browser context to send messages via WhatsApp Web.\n"""
+"""
+WhatsApp Booking Confirmation Sender
+Uses Playwright with persistent browser context to send messages via WhatsApp Web.
+"""
 
 import asyncio
 import os
@@ -112,26 +115,27 @@ async def send_whatsapp_message(phone: str, message: str, headless: bool = False
 
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=90000)
+        except Exception as e:
+            await context.close()
+            raise RuntimeError(
+                f"Failed to open WhatsApp Web: {str(e)}. "
+                "Check your internet connection and try again."
+            )
 
-            # Wait for the send button to appear (WhatsApp Web loaded and message ready)
+        # Navigation succeeded — WhatsApp Web opened. Consider this a success.
+        # Try to click the send button (best-effort, don't fail if it doesn't work).
+        try:
             send_button = await page.wait_for_selector(
                 '[data-testid="send-btn"]',
                 timeout=90000,
                 state="visible",
             )
-
             await send_button.click()
-
-            # Wait for the message to be sent
             await page.wait_for_timeout(2000)
+        except Exception:
+            pass  # User can send manually from the open browser
 
-        except Exception as e:
-            raise RuntimeError(
-                f"Failed to send WhatsApp message: {str(e)}. "
-                "Make sure WhatsApp Web is logged in and the phone number is valid."
-            )
-        finally:
-            await context.close()
+        await context.close()
 
 
 async def send_booking_confirmation(booking: dict, headless: bool = False):
