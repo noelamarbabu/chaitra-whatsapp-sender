@@ -7,15 +7,18 @@ import signal
 from datetime import datetime
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, field_validator
 from openpyxl import Workbook, load_workbook
 from whatsapp_sender import send_booking_confirmation
 
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
 app = FastAPI(title="CBD WhatsApp Sender")
 
 # Logs directory (next to this script)
-LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+LOG_DIR = os.path.join(APP_DIR, "logs")
 
 # Session-specific Excel file — created once when the server starts
 SESSION_START = datetime.now()
@@ -120,6 +123,18 @@ class Booking(BaseModel):
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+
+@app.get("/")
+async def serve_form():
+    """Serve the booking form HTML page."""
+    return FileResponse(os.path.join(APP_DIR, "form.html"), media_type="text/html")
+
+
+@app.get("/cbd-logo.jpg")
+async def serve_logo():
+    """Serve the CBD logo image."""
+    return FileResponse(os.path.join(APP_DIR, "cbd-logo.jpg"), media_type="image/jpeg")
 
 
 @app.post("/send")

@@ -1,0 +1,11 @@
+services:
+  whatsapp-sender:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - whatsapp_session:/app/whatsapp_session
+      - ./logs:/app/logs
+
+volumes:
+  whatsapp_session:

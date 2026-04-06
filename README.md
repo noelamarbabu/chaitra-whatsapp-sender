@@ -4,19 +4,6 @@ A local web application that lets staff fill in customer booking details via a w
 
 ---
 
-## Features
-
-- **Professional branded form** with CBD maroon/gold color scheme and logo
-- **Live message preview** updates as you type
-- **Auto-send via WhatsApp Web** using Playwright browser automation
-- **Excel session logging** — each session creates a timestamped `.xlsx` file in `logs/`
-- **Floating log notification** shows current log file and record count
-- **Calendar date pickers** with Today button on all date fields
-- **Session management** — End Session (shutdown) and Start Session (restart polling)
-- **Copy to clipboard** for manual pasting
-
----
-
 ## Prerequisites
 
 - Python 3.9+
@@ -49,6 +36,7 @@ python whatsapp_sender.py
 - Scan the QR code with your phone's WhatsApp app.
 - Once logged in, the session is saved to the `whatsapp_session/` folder.
 - You only need to do this once. Future runs will reuse the saved session.
+- **Note:** The first run will also attempt to send a test message with sample data. You can stop it after scanning the QR if you just want to set up the session.
 
 ### 4. Start the backend server
 
@@ -73,8 +61,6 @@ Open `form.html` in your browser (just double-click it or drag it into a browser
 2. The **Message Preview** box at the bottom updates live as you type.
 3. Click **Send via WhatsApp** to send the message automatically.
 4. Or click **Copy Message** to copy the formatted text to your clipboard.
-5. Click **End Session** to shut down the backend and save the log.
-6. Click **Start Session** to restart (requires running `python api.py` again).
 
 ---
 
@@ -83,33 +69,20 @@ Open `form.html` in your browser (just double-click it or drag it into a browser
 ```
 chaitra-whatsapp-sender/
 ├── whatsapp_sender.py     # Core Playwright automation logic
-├── api.py                 # FastAPI backend with Excel logging
+├── api.py                 # FastAPI backend
 ├── form.html              # Web form (opened in browser)
-├── cbd-logo.jpg           # CBD company logo
 ├── requirements.txt       # Python dependencies
 ├── README.md              # This file
 ├── .gitignore             # Git ignore rules
-├── whatsapp_session/      # Auto-created: saves WhatsApp login session
-└── logs/                  # Auto-created: per-session Excel log files
+└── whatsapp_session/      # Auto-created: saves WhatsApp login session
 ```
-
----
-
-## API Endpoints
-
-| Endpoint | Method | Description |
-|---|---|---|
-| `/health` | GET | Health check |
-| `/send` | POST | Send booking confirmation via WhatsApp |
-| `/log-info` | GET | Get current log file name and record count |
-| `/shutdown` | POST | Shut down the backend server |
 
 ---
 
 ## Important Notes
 
 - **`whatsapp_session/` folder** keeps your WhatsApp Web login session. Do not delete it, or you will need to scan the QR code again.
-- **`logs/` folder** contains per-session Excel files named with the session start timestamp (e.g., `06-04-2026_02-30-15_PM.xlsx`).
+- **Headless mode:** After first login, you can change `headless=False` to `headless=True` in `whatsapp_sender.py` to run the browser invisibly.
 - **This tool is designed for low-volume use** — sending individual booking confirmations, not bulk messaging.
 - Phone numbers must be 10 digits (Indian numbers only, +91 prefix is added automatically).
 
