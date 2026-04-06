@@ -26,7 +26,7 @@
 
       /* Header */
       .header {
-        background: #1d9e75;
+        background: #8b1220;
         color: #fff;
         border-radius: 12px 12px 0 0;
         padding: 24px 28px;
@@ -36,17 +36,18 @@
       }
 
       .logo {
-        width: 52px;
-        height: 52px;
-        background: #fff;
-        color: #1d9e75;
-        font-size: 28px;
-        font-weight: 800;
+        width: 56px;
+        height: 56px;
         border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
       }
 
       .header-text h1 {
@@ -100,12 +101,12 @@
       .section-title {
         font-size: 14px;
         font-weight: 700;
-        color: #1d9e75;
+        color: #8b1220;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin: 24px 0 12px;
         padding-bottom: 6px;
-        border-bottom: 2px solid #e8f5ef;
+        border-bottom: 2px solid #f5e0e3;
       }
 
       .section-title:first-child {
@@ -138,7 +139,8 @@
       }
 
       .form-group input,
-      .form-group select {
+      .form-group select,
+      .form-group textarea {
         padding: 10px 12px;
         border: 1.5px solid #ddd;
         border-radius: 8px;
@@ -150,10 +152,56 @@
       }
 
       .form-group input:focus,
-      .form-group select:focus {
+      .form-group select:focus,
+      .form-group textarea:focus {
         outline: none;
-        border-color: #1d9e75;
-        box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1);
+        border-color: #8b1220;
+        box-shadow: 0 0 0 3px rgba(139, 18, 32, 0.1);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        font-family: inherit;
+      }
+
+      /* Date picker wrapper */
+      .date-wrapper {
+        display: flex;
+        align-items: stretch;
+        gap: 6px;
+      }
+
+      .date-wrapper input[type="text"] {
+        flex: 1;
+      }
+
+      .date-wrapper input[type="date"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+      }
+
+      .date-btn {
+        padding: 8px 10px;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        background: #f0f2f5;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        white-space: nowrap;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+      }
+
+      .date-btn:hover {
+        background: #e4e6e9;
+        border-color: #8b1220;
+        color: #8b1220;
       }
 
       .phone-wrapper {
@@ -186,17 +234,17 @@
       .preview-label {
         font-size: 14px;
         font-weight: 700;
-        color: #1d9e75;
+        color: #8b1220;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-bottom: 10px;
         padding-bottom: 6px;
-        border-bottom: 2px solid #e8f5ef;
+        border-bottom: 2px solid #f5e0e3;
       }
 
       .preview-box {
-        background: #e8f5ef;
-        border: 1px solid #c8e6d8;
+        background: #fdf0f1;
+        border: 1px solid #e8c0c4;
         border-radius: 10px;
         padding: 18px 20px;
         font-family: "Courier New", Courier, monospace;
@@ -232,15 +280,15 @@
       }
 
       .btn-send {
-        background: #1d9e75;
+        background: #8b1220;
         color: #fff;
       }
 
       .btn-send:hover {
-        background: #178a66;
+        background: #6e0e1a;
       }
       .btn-send:disabled {
-        background: #a0d4c1;
+        background: #c8868e;
         cursor: not-allowed;
       }
 
@@ -252,6 +300,26 @@
 
       .btn-copy:hover {
         background: #e4e6e9;
+      }
+
+      .btn-end {
+        background: #dc3545;
+        color: #fff;
+        flex: 0 0 auto;
+      }
+
+      .btn-end:hover {
+        background: #b02a37;
+      }
+
+      .btn-start {
+        background: #faa41a;
+        color: #fff;
+        flex: 0 0 auto;
+      }
+
+      .btn-start:hover {
+        background: #e08f0e;
       }
 
       /* Spinner */
@@ -301,6 +369,63 @@
         background: #dc3545;
       }
 
+      /* Floating Log Notification */
+      .log-panel {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        padding: 14px 18px;
+        min-width: 260px;
+        max-width: 340px;
+        z-index: 9998;
+        border-left: 4px solid #8b1220;
+        font-size: 13px;
+        transition: all 0.4s ease;
+        opacity: 0;
+        transform: translateX(20px);
+        pointer-events: none;
+      }
+
+      .log-panel.visible {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+      }
+
+      .log-panel .log-title {
+        font-weight: 700;
+        color: #8b1220;
+        font-size: 13px;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .log-panel .log-title .log-icon {
+        font-size: 16px;
+      }
+
+      .log-panel .log-detail {
+        color: #555;
+        line-height: 1.6;
+      }
+
+      .log-panel .log-detail strong {
+        color: #1a1a1a;
+      }
+
+      .log-panel.saved {
+        border-left-color: #28a745;
+      }
+
+      .log-panel.saved .log-title {
+        color: #28a745;
+      }
+
       /* Responsive */
       @media (max-width: 600px) {
         .form-grid {
@@ -322,7 +447,7 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <div class="logo">C</div>
+        <div class="logo"><img src="cbd-logo.jpg" alt="CBD Logo" /></div>
         <div class="header-text">
           <h1>Chaitra Builders &amp; Developers</h1>
           <p>WhatsApp Booking Confirmation Sender</p>
@@ -347,12 +472,29 @@
             </div>
             <div class="form-group">
               <label>Booked Date *</label>
-              <input
-                type="text"
-                id="booked_date"
-                placeholder="DD/MM/YYYY"
-                required
-              />
+              <div class="date-wrapper">
+                <input
+                  type="text"
+                  id="booked_date"
+                  placeholder="DD/MM/YYYY"
+                  required
+                />
+                <input type="date" id="booked_date_picker" />
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="pickDate('booked_date')"
+                >
+                  📅
+                </button>
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="setToday('booked_date')"
+                >
+                  Today
+                </button>
+              </div>
             </div>
             <div class="form-group">
               <label>WhatsApp Number *</label>
@@ -435,23 +577,74 @@
             </div>
             <div class="form-group">
               <label>Registration Slot 1</label>
-              <input type="text" id="reg_slot_1" placeholder="DD/MM/YYYY" />
+              <div class="date-wrapper">
+                <input type="text" id="reg_slot_1" placeholder="DD/MM/YYYY" />
+                <input type="date" id="reg_slot_1_picker" />
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="pickDate('reg_slot_1')"
+                >
+                  📅
+                </button>
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="setToday('reg_slot_1')"
+                >
+                  Today
+                </button>
+              </div>
             </div>
             <div class="form-group">
               <label>Registration Slot 2 (optional)</label>
-              <input type="text" id="reg_slot_2" placeholder="DD/MM/YYYY" />
+              <div class="date-wrapper">
+                <input type="text" id="reg_slot_2" placeholder="DD/MM/YYYY" />
+                <input type="date" id="reg_slot_2_picker" />
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="pickDate('reg_slot_2')"
+                >
+                  📅
+                </button>
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="setToday('reg_slot_2')"
+                >
+                  Today
+                </button>
+              </div>
             </div>
             <div class="form-group">
               <label>Balance Due Date</label>
-              <input
-                type="text"
-                id="balance_due_date"
-                placeholder="DD/MM/YYYY"
-              />
+              <div class="date-wrapper">
+                <input
+                  type="text"
+                  id="balance_due_date"
+                  placeholder="DD/MM/YYYY"
+                />
+                <input type="date" id="balance_due_date_picker" />
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="pickDate('balance_due_date')"
+                >
+                  📅
+                </button>
+                <button
+                  type="button"
+                  class="date-btn"
+                  onclick="setToday('balance_due_date')"
+                >
+                  Today
+                </button>
+              </div>
             </div>
-            <div class="form-group">
+            <div class="form-group full">
               <label>Feedback (optional)</label>
-              <input type="text" id="feedback" placeholder="-" />
+              <textarea id="feedback" placeholder="-" rows="3"></textarea>
             </div>
           </div>
 
@@ -472,15 +665,62 @@
             <button type="button" class="btn btn-copy" id="copyBtn">
               📋 Copy Message
             </button>
+            <button type="button" class="btn btn-end" id="endBtn">
+              ⏻ End Session
+            </button>
+            <button
+              type="button"
+              class="btn btn-start"
+              id="startBtn"
+              style="display: none"
+            >
+              ▶ Start Session
+            </button>
           </div>
         </form>
       </div>
+    </div>
+
+    <!-- Floating Log Notification -->
+    <div class="log-panel" id="logPanel">
+      <div class="log-title">
+        <span class="log-icon">📊</span>
+        <span>Excel Log</span>
+      </div>
+      <div class="log-detail" id="logDetail">Waiting for first record...</div>
     </div>
 
     <!-- Toast notification -->
     <div class="toast" id="toast"></div>
 
     <script>
+      // --- Date picker helpers (global so onclick attributes work) ---
+      function formatDateDMY(dateObj) {
+        var dd = String(dateObj.getDate()).padStart(2, "0");
+        var mm = String(dateObj.getMonth() + 1).padStart(2, "0");
+        var yyyy = dateObj.getFullYear();
+        return dd + "/" + mm + "/" + yyyy;
+      }
+
+      function setToday(fieldId) {
+        var el = document.getElementById(fieldId);
+        el.value = formatDateDMY(new Date());
+        el.dispatchEvent(new Event("input"));
+      }
+
+      function pickDate(fieldId) {
+        var picker = document.getElementById(fieldId + "_picker");
+        picker.onchange = function () {
+          if (picker.value) {
+            var parts = picker.value.split("-");
+            document.getElementById(fieldId).value =
+              parts[2] + "/" + parts[1] + "/" + parts[0];
+            document.getElementById(fieldId).dispatchEvent(new Event("input"));
+          }
+        };
+        picker.showPicker();
+      }
+
       (function () {
         const API_BASE = "http://localhost:8000";
 
@@ -515,6 +755,52 @@
         const statusDot = document.getElementById("statusDot");
         const statusText = document.getElementById("statusText");
         const toast = document.getElementById("toast");
+        const logPanel = document.getElementById("logPanel");
+        const logDetail = document.getElementById("logDetail");
+
+        // --- Log panel helpers ---
+
+        function showLogPanel(filename, recordNum, saved) {
+          logPanel.className = saved
+            ? "log-panel visible saved"
+            : "log-panel visible";
+          if (saved) {
+            logDetail.innerHTML =
+              "<strong>" +
+              recordNum +
+              "</strong> record" +
+              (recordNum !== 1 ? "s" : "") +
+              " saved." +
+              "<br>File: <strong>" +
+              filename +
+              "</strong>" +
+              "<br>\u2705 Session ended.";
+          } else {
+            logDetail.innerHTML =
+              "File: <strong>" +
+              filename +
+              "</strong>" +
+              "<br>Record updated: <strong>#" +
+              recordNum +
+              "</strong>";
+          }
+        }
+
+        function fetchLogInfo() {
+          fetch(API_BASE + "/log-info")
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (data) {
+              if (data.record_count > 0) {
+                showLogPanel(data.log_file, data.record_count, false);
+              }
+            })
+            .catch(function () {});
+        }
+
+        // Fetch log info on page load
+        fetchLogInfo();
 
         // --- Helper functions ---
 
@@ -742,6 +1028,9 @@
                 "Message sent to " + data.phone + " successfully!",
                 "success",
               );
+              if (result.log_file && result.record_number) {
+                showLogPanel(result.log_file, result.record_number, false);
+              }
             })
             .catch(function (err) {
               setLoading(false);
@@ -780,6 +1069,90 @@
               }
               document.body.removeChild(textarea);
             });
+        });
+
+        // --- End / Start Session buttons ---
+
+        var endBtn = document.getElementById("endBtn");
+        var startBtn = document.getElementById("startBtn");
+
+        endBtn.addEventListener("click", function () {
+          if (
+            !confirm(
+              "Are you sure you want to end the session and shut down the backend?",
+            )
+          )
+            return;
+          fetch(API_BASE + "/shutdown", { method: "POST" })
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (result) {
+              showToast("Session ended. Backend is shutting down.", "success");
+              sendBtn.disabled = true;
+              statusDot.className = "status-dot offline";
+              statusText.textContent = "Backend stopped";
+              endBtn.style.display = "none";
+              startBtn.style.display = "flex";
+              var total = result.total_records || 0;
+              var file = result.log_file || "";
+              if (total > 0) {
+                showLogPanel(file, total, true);
+              } else {
+                logPanel.className = "log-panel visible saved";
+                logDetail.innerHTML =
+                  "No records this session.<br>\u2705 Session ended.";
+              }
+            })
+            .catch(function () {
+              showToast(
+                "Could not reach backend — it may already be stopped.",
+                "error",
+              );
+              endBtn.style.display = "none";
+              startBtn.style.display = "flex";
+            });
+        });
+
+        startBtn.addEventListener("click", function () {
+          showToast("Starting backend... please wait.", "success");
+          startBtn.disabled = true;
+          startBtn.textContent = "Starting...";
+
+          // Poll until the backend comes back online
+          var attempts = 0;
+          var maxAttempts = 30;
+          var pollInterval = setInterval(function () {
+            attempts++;
+            fetch(API_BASE + "/health")
+              .then(function (res) {
+                return res.json();
+              })
+              .then(function (data) {
+                if (data.status === "ok") {
+                  clearInterval(pollInterval);
+                  showToast("Backend is online!", "success");
+                  sendBtn.disabled = false;
+                  statusDot.className = "status-dot online";
+                  statusText.textContent = "Backend online (localhost:8000)";
+                  startBtn.style.display = "none";
+                  startBtn.disabled = false;
+                  startBtn.textContent = "▶ Start Session";
+                  endBtn.style.display = "flex";
+                }
+              })
+              .catch(function () {
+                if (attempts >= maxAttempts) {
+                  clearInterval(pollInterval);
+                  showToast(
+                    "Backend did not start. Run 'python api.py' manually.",
+                    "error",
+                  );
+                  startBtn.disabled = false;
+                  startBtn.textContent = "▶ Start Session";
+                }
+              });
+          }, 2000);
         });
 
         // Initial preview
