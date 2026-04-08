@@ -440,6 +440,571 @@
         .card {
           padding: 20px;
         }
+        .bulk-actions {
+          flex-direction: column;
+        }
+        .upload-row {
+          flex-direction: column;
+        }
+      }
+
+      /* Bulk Send Section */
+      .bulk-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 28px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        margin-top: 16px;
+      }
+
+      .bulk-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .bulk-actions .btn {
+        flex: none;
+      }
+
+      .btn-template {
+        background: #17a2b8;
+        color: #fff;
+      }
+      .btn-template:hover {
+        background: #138496;
+      }
+
+      .btn-upload {
+        background: #28a745;
+        color: #fff;
+      }
+      .btn-upload:hover {
+        background: #218838;
+      }
+
+      .btn-bulk-send {
+        background: #8b1220;
+        color: #fff;
+      }
+      .btn-bulk-send:hover {
+        background: #6e0e1a;
+      }
+      .btn-bulk-send:disabled {
+        background: #c8868e;
+        cursor: not-allowed;
+      }
+
+      .upload-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .upload-row input[type="file"] {
+        flex: 1;
+        padding: 8px;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+
+      .bulk-preview-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+        font-size: 13px;
+      }
+
+      .bulk-table-wrap {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-top: 16px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+      }
+
+      .bulk-preview-table th {
+        background: #8b1220;
+        color: #fff;
+        padding: 8px 10px;
+        text-align: left;
+        font-size: 11px;
+        text-transform: uppercase;
+        position: sticky;
+        top: 0;
+      }
+
+      .bulk-preview-table td {
+        padding: 6px 10px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .bulk-preview-table tr:nth-child(even) {
+        background: #f9f9f9;
+      }
+
+      /* Bulk Status Modal */
+      .bulk-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .bulk-modal-overlay.active {
+        display: flex;
+      }
+
+      .bulk-modal {
+        background: #fff;
+        border-radius: 14px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .bulk-modal-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .bulk-modal-header h3 {
+        font-size: 18px;
+        color: #8b1220;
+        margin: 0;
+      }
+
+      .bulk-modal-body {
+        padding: 20px 24px;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .bulk-progress {
+        height: 8px;
+        background: #e9ecef;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+
+      .bulk-progress-bar {
+        height: 100%;
+        background: #8b1220;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+        width: 0%;
+      }
+
+      .bulk-summary {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+
+      .bulk-status-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .bulk-status-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 13px;
+      }
+
+      .bulk-status-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      .bulk-status-icon.preparing {
+        background: #fff3cd;
+      }
+      .bulk-status-icon.sending {
+        background: #cce5ff;
+      }
+      .bulk-status-icon.delivered {
+        background: #d4edda;
+      }
+      .bulk-status-icon.failed {
+        background: #f8d7da;
+      }
+
+      .bulk-status-info {
+        flex: 1;
+      }
+
+      .bulk-status-info .name {
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      .bulk-status-info .phone {
+        color: #888;
+        font-size: 12px;
+      }
+
+      .bulk-status-badge {
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .bulk-status-badge.preparing {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .bulk-status-badge.sending {
+        background: #cce5ff;
+        color: #004085;
+      }
+      .bulk-status-badge.delivered {
+        background: #d4edda;
+        color: #155724;
+      }
+      .bulk-status-badge.failed {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .bulk-modal-footer {
+        padding: 16px 24px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      /* Bulk Preview Message Modal */
+      .bulk-msg-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10001;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .bulk-msg-modal-overlay.active {
+        display: flex;
+      }
+      .bulk-msg-modal {
+        background: #fff;
+        border-radius: 14px;
+        width: 92%;
+        max-width: 640px;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+      }
+      .bulk-msg-modal-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .bulk-msg-modal-header h3 {
+        font-size: 16px;
+        color: #8b1220;
+        margin: 0;
+      }
+      .bulk-msg-modal-body {
+        padding: 20px 24px;
+        overflow-y: auto;
+        flex: 1;
+      }
+      .bulk-msg-preview {
+        background: #f0f2f5;
+        padding: 16px;
+        border-radius: 10px;
+        white-space: pre-wrap;
+        font-size: 13px;
+        line-height: 1.6;
+        max-height: 250px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        margin-bottom: 14px;
+      }
+      .bulk-msg-ai-section {
+        background: linear-gradient(135deg, #f8f0ff, #f0f4ff);
+        border: 1.5px solid #d4c0ed;
+        border-radius: 10px;
+        padding: 14px 16px;
+      }
+      .bulk-msg-ai-section .ai-section-title {
+        margin-bottom: 8px;
+      }
+      .bulk-msg-ai-row {
+        display: flex;
+        gap: 8px;
+        align-items: stretch;
+      }
+      .bulk-msg-ai-row input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1.5px solid #d4c0ed;
+        border-radius: 8px;
+        font-size: 13px;
+        outline: none;
+      }
+      .bulk-msg-ai-row input:focus {
+        border-color: #6b21a8;
+      }
+      .bulk-msg-ai-result {
+        background: #fff;
+        border: 1.5px solid #d4c0ed;
+        border-radius: 8px;
+        padding: 14px;
+        white-space: pre-wrap;
+        font-size: 13px;
+        line-height: 1.6;
+        max-height: 200px;
+        overflow-y: auto;
+        margin-top: 10px;
+        display: none;
+      }
+      .bulk-msg-modal-footer {
+        padding: 14px 24px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+      .btn-preview-action {
+        padding: 8px 18px;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-preview-action.save {
+        background: #28a745;
+        color: #fff;
+      }
+      .btn-preview-action.save:hover {
+        background: #218838;
+      }
+      .btn-preview-action.reset {
+        background: #ffc107;
+        color: #1a1a1a;
+      }
+      .btn-preview-action.reset:hover {
+        background: #e0a800;
+      }
+      .btn-preview-action.close {
+        background: #6c757d;
+        color: #fff;
+      }
+      .btn-preview-action.close:hover {
+        background: #5a6268;
+      }
+      .bulk-ai-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #6b21a8, #9333ea);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 6px;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
+
+      .btn-close-modal {
+        padding: 10px 24px;
+        border: none;
+        border-radius: 8px;
+        background: #6c757d;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-close-modal:hover {
+        background: #5a6268;
+      }
+      .btn-close-modal:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* AI Enhance */
+      .ai-section {
+        margin-top: 14px;
+        background: linear-gradient(135deg, #f8f0ff, #f0f4ff);
+        border: 1.5px solid #d4c0ed;
+        border-radius: 10px;
+        padding: 16px 18px;
+      }
+
+      .ai-section-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #6b21a8;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .ai-instruction-row {
+        display: flex;
+        gap: 8px;
+        align-items: stretch;
+      }
+
+      .ai-instruction-row input {
+        flex: 1;
+        padding: 10px 12px;
+        border: 1.5px solid #d4c0ed;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #1a1a1a;
+        background: #fff;
+      }
+
+      .ai-instruction-row input:focus {
+        outline: none;
+        border-color: #6b21a8;
+        box-shadow: 0 0 0 3px rgba(107, 33, 168, 0.1);
+      }
+
+      .btn-ai {
+        background: #6b21a8;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.2s;
+      }
+
+      .btn-ai:hover {
+        background: #581c87;
+      }
+
+      .btn-ai:disabled {
+        background: #b89cd9;
+        cursor: not-allowed;
+      }
+
+      .ai-presets {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+
+      .ai-preset-chip {
+        background: #fff;
+        border: 1px solid #d4c0ed;
+        border-radius: 16px;
+        padding: 4px 12px;
+        font-size: 11px;
+        color: #6b21a8;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 600;
+      }
+
+      .ai-preset-chip:hover {
+        background: #6b21a8;
+        color: #fff;
+      }
+
+      .ai-result-box {
+        background: #fff;
+        border: 1.5px solid #d4c0ed;
+        border-radius: 10px;
+        padding: 16px 18px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-word;
+        color: #1a1a1a;
+        max-height: 350px;
+        overflow-y: auto;
+        margin-top: 12px;
+        display: none;
+      }
+
+      .ai-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        display: none;
+      }
+
+      .btn-ai-use {
+        background: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn-ai-use:hover {
+        background: #218838;
+      }
+
+      .btn-ai-discard {
+        background: #f0f2f5;
+        color: #555;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn-ai-discard:hover {
+        background: #e4e6e9;
       }
     </style>
   </head>
@@ -656,6 +1221,77 @@
             </div>
           </div>
 
+          <!-- AI Enhance Section -->
+          <div class="ai-section">
+            <div class="ai-section-title">✨ AI Message Enhance</div>
+            <div class="ai-instruction-row">
+              <input
+                type="text"
+                id="aiInstruction"
+                placeholder="e.g. Make it more warm and friendly, Add a festive greeting, Add urgency for payment..."
+              />
+              <button type="button" class="btn-ai" id="aiEnhanceBtn">
+                ✨ Enhance
+              </button>
+            </div>
+            <div class="ai-presets">
+              <span
+                class="ai-preset-chip"
+                data-prompt="Make it more warm and friendly"
+                >🤝 Friendly</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Make it more professional and formal"
+                >💼 Professional</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Add a festive/celebration greeting at the top"
+                >🎉 Festive</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Add urgency about clearing the balance amount before the due date"
+                >⚡ Payment Urgency</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Make it concise and short, keep only essential details"
+                >📝 Concise</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Translate to Telugu while keeping all details intact"
+                >🗣️ Telugu</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Translate to Tamil while keeping all details intact"
+                >🗣️ Tamil</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Translate to Kannada while keeping all details intact"
+                >🗣️ Kannada</span
+              >
+              <span
+                class="ai-preset-chip"
+                data-prompt="Translate to Hindi while keeping all details intact"
+                >🗣️ Hindi</span
+              >
+            </div>
+            <div class="ai-result-box" id="aiResultBox"></div>
+            <div class="ai-actions" id="aiActions">
+              <button type="button" class="btn-ai-use" id="aiUseBtn">
+                ✅ Use This Message
+              </button>
+              <button type="button" class="btn-ai-discard" id="aiDiscardBtn">
+                ✖ Discard
+              </button>
+            </div>
+          </div>
+
           <!-- Buttons -->
           <div class="btn-row">
             <button type="submit" class="btn btn-send" id="sendBtn">
@@ -678,6 +1314,155 @@
             </button>
           </div>
         </form>
+      </div>
+
+      <!-- Bulk Send Section -->
+      <div class="bulk-card">
+        <div class="section-title">Bulk WhatsApp Send</div>
+        <div class="bulk-actions">
+          <button
+            type="button"
+            class="btn btn-template"
+            id="downloadTemplateBtn"
+          >
+            📥 Download Template
+          </button>
+          <div class="upload-row">
+            <input type="file" id="bulkFile" accept=".xlsx,.xls" />
+            <button type="button" class="btn btn-upload" id="uploadExcelBtn">
+              📤 Upload Excel
+            </button>
+          </div>
+          <button
+            type="button"
+            class="btn btn-bulk-send"
+            id="bulkSendBtn"
+            disabled
+          >
+            🚀 Bulk Send
+          </button>
+        </div>
+        <div id="bulkPreview"></div>
+      </div>
+    </div>
+
+    <!-- Bulk Status Modal -->
+    <div class="bulk-modal-overlay" id="bulkModalOverlay">
+      <div class="bulk-modal">
+        <div class="bulk-modal-header">
+          <h3>📡 Bulk Send Status</h3>
+        </div>
+        <div class="bulk-modal-body">
+          <div class="bulk-progress">
+            <div class="bulk-progress-bar" id="bulkProgressBar"></div>
+          </div>
+          <div class="bulk-summary" id="bulkSummary">Preparing to send...</div>
+          <ul class="bulk-status-list" id="bulkStatusList"></ul>
+        </div>
+        <div class="bulk-modal-footer">
+          <button class="btn-close-modal" id="closeBulkModal" disabled>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bulk Message Preview / AI Enhance Modal -->
+    <div class="bulk-msg-modal-overlay" id="bulkMsgModalOverlay">
+      <div class="bulk-msg-modal">
+        <div class="bulk-msg-modal-header">
+          <h3 id="bulkMsgModalTitle">📋 Message Preview</h3>
+          <span id="bulkMsgIdx" style="font-size: 12px; color: #888"></span>
+        </div>
+        <div class="bulk-msg-modal-body">
+          <div class="bulk-msg-preview" id="bulkMsgPreview"></div>
+          <div class="bulk-msg-ai-section">
+            <div class="ai-section-title">✨ AI Enhance This Message</div>
+            <div class="bulk-msg-ai-row">
+              <input
+                type="text"
+                id="bulkAiInstruction"
+                placeholder="e.g. Make it friendly, Translate to Telugu..."
+              />
+              <button type="button" class="btn-ai" id="bulkAiEnhanceBtn">
+                ✨ Enhance
+              </button>
+            </div>
+            <div class="ai-presets" style="margin-top: 8px">
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Make it more warm and friendly"
+                >🤝 Friendly</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Make it more professional and formal"
+                >💼 Professional</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Add a festive/celebration greeting at the top"
+                >🎉 Festive</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Add urgency about clearing the balance amount before the due date"
+                >⚡ Payment Urgency</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Make it concise and short, keep only essential details"
+                >📝 Concise</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Translate to Telugu while keeping all details intact"
+                >🗣️ Telugu</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Translate to Tamil while keeping all details intact"
+                >🗣️ Tamil</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Translate to Kannada while keeping all details intact"
+                >🗣️ Kannada</span
+              >
+              <span
+                class="ai-preset-chip bulk-ai-chip"
+                data-prompt="Translate to Hindi while keeping all details intact"
+                >🗣️ Hindi</span
+              >
+            </div>
+            <div class="bulk-msg-ai-result" id="bulkAiResult"></div>
+          </div>
+        </div>
+        <div class="bulk-msg-modal-footer">
+          <button
+            type="button"
+            class="btn-preview-action save"
+            id="bulkMsgUseAiBtn"
+            style="display: none"
+          >
+            ✅ Use AI Message
+          </button>
+          <button
+            type="button"
+            class="btn-preview-action reset"
+            id="bulkMsgResetBtn"
+            style="display: none"
+          >
+            ↩ Reset to Original
+          </button>
+          <button
+            type="button"
+            class="btn-preview-action close"
+            id="bulkMsgCloseBtn"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
 
@@ -918,6 +1703,7 @@
         }
 
         function updatePreview() {
+          delete previewBox.dataset.aiOverride;
           previewBox.textContent = buildMessage();
         }
 
@@ -1007,6 +1793,9 @@
           }
 
           var data = getFormData();
+          if (previewBox.dataset.aiOverride) {
+            data.custom_message = previewBox.dataset.aiOverride;
+          }
           setLoading(true);
 
           fetch(API_BASE + "/send", {
@@ -1041,7 +1830,7 @@
         // --- Copy button ---
 
         copyBtn.addEventListener("click", function () {
-          var msg = buildMessage();
+          var msg = previewBox.dataset.aiOverride || buildMessage();
           navigator.clipboard
             .writeText(msg)
             .then(function () {
@@ -1154,6 +1943,597 @@
               });
           }, 2000);
         });
+
+        // --- Bulk Send Logic ---
+
+        var bulkBookings = [];
+        var bulkCustomMessages = []; // AI-enhanced per-row messages (empty = use default)
+
+        // Helper: build default message for a bulk booking (mirrors whatsapp_sender.py logic)
+        function buildBulkMessage(b) {
+          function bv(k, d) {
+            var v = (b[k] || "").toString().trim();
+            return v === "" ? d || "-" : v;
+          }
+          var cn = bv("customer_name");
+          var bd = bv("booked_date");
+          var ph = bv("phone");
+          var mi = bv("mail_id");
+          var pn = bv("plot_no");
+          var sq = bv("sqft");
+          var fc = bv("facing");
+          var ap = bv("actual_price");
+          var cp = bv("closing_price");
+          var tp = bv("total_price");
+          var pa = bv("paid_amount");
+          var ba = bv("balance_amount");
+          var of_ = bv("offer");
+          var rs1 = bv("reg_slot_1", "");
+          var rs2 = bv("reg_slot_2", "");
+          var bdd = bv("balance_due_date", "");
+          var fb = bv("feedback");
+          var regLine = rs1 && rs2 ? rs1 + " & " + rs2 : rs1 || "-";
+          var balUpdate = bdd
+            ? "THIS IS TO INFORMING YOU REMAINING BALANCE AMOUNT SHOULD CLEAR ON OR BEFORE " +
+              bdd +
+              " TO PROCESS REGISTRATION WORKS."
+            : "-";
+          return (
+            "*WELCOME TO CBD FAMILY.*\nTHANK YOU FOR CHOOSING US.\nBELOW ARE YOUR BOOKING DETAILS.\n\n" +
+            "CUSTOMER NAME :- " +
+            cn +
+            "\n" +
+            "BOOKED DATE :- " +
+            bd +
+            "\n" +
+            "CONTACT :- " +
+            ph +
+            "\n" +
+            "MAIL ID :- " +
+            mi +
+            "\n" +
+            "PLOT NO :- " +
+            pn +
+            "\n" +
+            "SQFT :- " +
+            sq +
+            "\n" +
+            "FACING :- " +
+            fc +
+            "\n" +
+            "ACTUAL PRICE :- \u20b9" +
+            ap +
+            "\n" +
+            "CLOSING PRICE IN SQFT :- \u20b9" +
+            cp +
+            "/-\n" +
+            "TOTAL PRICE :- \u20b9" +
+            tp +
+            "\n" +
+            "PAID AMOUNT :- \u20b9" +
+            pa +
+            "\n" +
+            "BALANCE AMOUNT :- " +
+            ba +
+            "\n" +
+            "OFFER :- " +
+            of_ +
+            "\n" +
+            "REGISTRATION SLOT :- " +
+            regLine +
+            "\n" +
+            "BALANCE AMOUNT UPDATE :- " +
+            balUpdate +
+            "\n" +
+            "FEEDBACK :- " +
+            fb +
+            "\n\n" +
+            "https://whatsapp.com/channel/0029Vax9QUa1CYoIwIGu6D2V\n\n" +
+            "REGARDS\nCHAITRA BUILDERS AND DEVELOPERS"
+          );
+        }
+
+        // Download template
+        document
+          .getElementById("downloadTemplateBtn")
+          .addEventListener("click", function () {
+            window.location.href = API_BASE + "/download-template";
+          });
+
+        // Upload Excel
+        document
+          .getElementById("uploadExcelBtn")
+          .addEventListener("click", function () {
+            var fileInput = document.getElementById("bulkFile");
+            if (!fileInput.files || !fileInput.files[0]) {
+              showToast("Please select an Excel file first.", "error");
+              return;
+            }
+
+            var formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            fetch(API_BASE + "/upload-bulk", {
+              method: "POST",
+              body: formData,
+            })
+              .then(function (res) {
+                if (!res.ok)
+                  return res.json().then(function (err) {
+                    throw new Error(err.detail || "Upload failed");
+                  });
+                return res.json();
+              })
+              .then(function (data) {
+                bulkBookings = data.bookings;
+                bulkCustomMessages = new Array(bulkBookings.length).fill("");
+                showToast(
+                  data.count + " records loaded from Excel.",
+                  "success",
+                );
+                document.getElementById("bulkSendBtn").disabled =
+                  bulkBookings.length === 0;
+
+                var preview = document.getElementById("bulkPreview");
+                if (bulkBookings.length === 0) {
+                  preview.innerHTML =
+                    '<p style="color:#888;margin-top:12px;">No valid records found.</p>';
+                  return;
+                }
+                var html =
+                  '<div class="bulk-table-wrap"><table class="bulk-preview-table"><thead><tr>';
+                html +=
+                  "<th>#</th><th>Customer Name</th><th>Phone</th><th>Plot No</th><th>Total Price</th><th>Message</th>";
+                html += "</tr></thead><tbody>";
+                bulkBookings.forEach(function (b, i) {
+                  html += "<tr>";
+                  html += "<td>" + (i + 1) + "</td>";
+                  html += "<td>" + (b.customer_name || "-") + "</td>";
+                  html += "<td>" + (b.phone || "-") + "</td>";
+                  html += "<td>" + (b.plot_no || "-") + "</td>";
+                  html += "<td>\u20b9" + (b.total_price || "-") + "</td>";
+                  html +=
+                    '<td><button type="button" class="btn-preview-action save" style="padding:4px 12px;font-size:11px;" onclick="openBulkMsgPreview(' +
+                    i +
+                    ')">📋 Preview / AI</button>';
+                  html += '<span id="bulk-ai-tag-' + i + '"></span></td>';
+                  html += "</tr>";
+                });
+                html += "</tbody></table></div>";
+                preview.innerHTML = html;
+              })
+              .catch(function (err) {
+                showToast("Error: " + err.message, "error");
+              });
+          });
+
+        // --- Bulk Message Preview / AI Enhance Modal Logic ---
+
+        var currentBulkIdx = -1;
+
+        window.openBulkMsgPreview = function (idx) {
+          currentBulkIdx = idx;
+          var b = bulkBookings[idx];
+          var originalMsg = buildBulkMessage(b);
+          var customMsg = bulkCustomMessages[idx];
+          var displayMsg = customMsg || originalMsg;
+
+          document.getElementById("bulkMsgModalTitle").textContent =
+            "📋 " + (b.customer_name || "Unknown") + " — Message Preview";
+          document.getElementById("bulkMsgIdx").textContent =
+            "Row " + (idx + 1) + " of " + bulkBookings.length;
+          document.getElementById("bulkMsgPreview").textContent = displayMsg;
+          document.getElementById("bulkAiInstruction").value = "";
+          document.getElementById("bulkAiResult").style.display = "none";
+          document.getElementById("bulkAiResult").textContent = "";
+          document.getElementById("bulkMsgUseAiBtn").style.display = "none";
+          document.getElementById("bulkMsgResetBtn").style.display = customMsg
+            ? "inline-block"
+            : "none";
+          document.getElementById("bulkMsgModalOverlay").className =
+            "bulk-msg-modal-overlay active";
+        };
+
+        // AI Enhance for bulk preview
+        document
+          .getElementById("bulkAiEnhanceBtn")
+          .addEventListener("click", function () {
+            var msg = document.getElementById("bulkMsgPreview").textContent;
+            var instruction = document
+              .getElementById("bulkAiInstruction")
+              .value.trim();
+            var btn = document.getElementById("bulkAiEnhanceBtn");
+            btn.disabled = true;
+            btn.innerHTML =
+              '<div class="spinner" style="display:inline-block;width:14px;height:14px;border-width:2px;"></div> Enhancing...';
+
+            fetch(API_BASE + "/ai-enhance", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: msg, instruction: instruction }),
+            })
+              .then(function (res) {
+                if (!res.ok)
+                  return res.json().then(function (err) {
+                    throw new Error(err.detail || "AI enhancement failed");
+                  });
+                return res.json();
+              })
+              .then(function (data) {
+                document.getElementById("bulkAiResult").textContent =
+                  data.enhanced_message;
+                document.getElementById("bulkAiResult").style.display = "block";
+                document.getElementById("bulkMsgUseAiBtn").style.display =
+                  "inline-block";
+                btn.disabled = false;
+                btn.innerHTML = "✨ Enhance";
+                showToast(
+                  "AI enhanced message ready!" +
+                    (data.provider ? " (via " + data.provider + ")" : ""),
+                  "success",
+                );
+              })
+              .catch(function (err) {
+                btn.disabled = false;
+                btn.innerHTML = "✨ Enhance";
+                showToast("AI Error: " + err.message, "error");
+              });
+          });
+
+        // Bulk AI preset chips
+        document.querySelectorAll(".bulk-ai-chip").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            document.getElementById("bulkAiInstruction").value =
+              chip.getAttribute("data-prompt");
+            document.getElementById("bulkAiEnhanceBtn").click();
+          });
+        });
+
+        // Use AI message for this row
+        document
+          .getElementById("bulkMsgUseAiBtn")
+          .addEventListener("click", function () {
+            var enhanced = document.getElementById("bulkAiResult").textContent;
+            if (enhanced && currentBulkIdx >= 0) {
+              bulkCustomMessages[currentBulkIdx] = enhanced;
+              document.getElementById("bulkMsgPreview").textContent = enhanced;
+              document.getElementById("bulkAiResult").style.display = "none";
+              document.getElementById("bulkMsgUseAiBtn").style.display = "none";
+              document.getElementById("bulkMsgResetBtn").style.display =
+                "inline-block";
+              var tag = document.getElementById(
+                "bulk-ai-tag-" + currentBulkIdx,
+              );
+              if (tag) tag.innerHTML = '<span class="bulk-ai-badge">AI</span>';
+              showToast(
+                "AI message saved for row " + (currentBulkIdx + 1) + ".",
+                "success",
+              );
+            }
+          });
+
+        // Reset to original for this row
+        document
+          .getElementById("bulkMsgResetBtn")
+          .addEventListener("click", function () {
+            if (currentBulkIdx >= 0) {
+              bulkCustomMessages[currentBulkIdx] = "";
+              document.getElementById("bulkMsgPreview").textContent =
+                buildBulkMessage(bulkBookings[currentBulkIdx]);
+              document.getElementById("bulkAiResult").style.display = "none";
+              document.getElementById("bulkMsgUseAiBtn").style.display = "none";
+              document.getElementById("bulkMsgResetBtn").style.display = "none";
+              var tag = document.getElementById(
+                "bulk-ai-tag-" + currentBulkIdx,
+              );
+              if (tag) tag.innerHTML = "";
+              showToast("Reset to original template message.", "success");
+            }
+          });
+
+        // Close bulk message preview modal
+        document
+          .getElementById("bulkMsgCloseBtn")
+          .addEventListener("click", function () {
+            document.getElementById("bulkMsgModalOverlay").className =
+              "bulk-msg-modal-overlay";
+          });
+
+        // Bulk Send
+        document
+          .getElementById("bulkSendBtn")
+          .addEventListener("click", function () {
+            if (bulkBookings.length === 0) {
+              showToast(
+                "No bookings loaded. Upload an Excel file first.",
+                "error",
+              );
+              return;
+            }
+
+            if (
+              !confirm(
+                "Send WhatsApp messages to " +
+                  bulkBookings.length +
+                  " contacts? One browser window will open and process rows sequentially.",
+              )
+            )
+              return;
+
+            var overlay = document.getElementById("bulkModalOverlay");
+            var progressBar = document.getElementById("bulkProgressBar");
+            var summary = document.getElementById("bulkSummary");
+            var statusList = document.getElementById("bulkStatusList");
+            var closeBtn = document.getElementById("closeBulkModal");
+
+            overlay.className = "bulk-modal-overlay active";
+            progressBar.style.width = "0%";
+            summary.textContent =
+              "Preparing to send " + bulkBookings.length + " messages...";
+            statusList.innerHTML = "";
+            closeBtn.disabled = true;
+
+            var delivered = 0;
+            var failed = 0;
+            var total = bulkBookings.length;
+
+            bulkBookings.forEach(function (b, i) {
+              var li = document.createElement("li");
+              li.className = "bulk-status-item";
+              li.id = "bulk-item-" + (i + 1);
+              li.innerHTML =
+                '<div class="bulk-status-icon preparing">\u23f3</div>' +
+                '<div class="bulk-status-info"><div class="name">' +
+                (b.customer_name || "Unknown") +
+                "</div>" +
+                '<div class="phone">+91 ' +
+                (b.phone || "-") +
+                "</div></div>" +
+                '<span class="bulk-status-badge preparing">Waiting</span>';
+              statusList.appendChild(li);
+            });
+
+            fetch(API_BASE + "/bulk-send", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                bookings: bulkBookings,
+                custom_messages: bulkCustomMessages,
+              }),
+            })
+              .then(function (response) {
+                if (!response.ok) {
+                  return response.json().then(function (err) {
+                    throw new Error(err.detail || "Bulk send request failed");
+                  });
+                }
+
+                if (!response.body) {
+                  throw new Error(
+                    "Streaming is not supported in this browser.",
+                  );
+                }
+
+                var reader = response.body.getReader();
+                var decoder = new TextDecoder();
+                var buffer = "";
+
+                function processStream() {
+                  reader
+                    .read()
+                    .then(function (result) {
+                      if (result.done) {
+                        closeBtn.disabled = false;
+                        summary.textContent =
+                          "Complete! Delivered: " +
+                          delivered +
+                          " | Failed: " +
+                          failed +
+                          " | Total: " +
+                          total;
+                        return;
+                      }
+
+                      buffer += decoder.decode(result.value, { stream: true });
+                      var lines = buffer.split("\n");
+                      buffer = lines.pop();
+
+                      lines.forEach(function (line) {
+                        if (line.startsWith("data: ")) {
+                          try {
+                            var data = JSON.parse(line.substring(6));
+                            updateBulkStatus(data);
+                          } catch (e) {}
+                        }
+                      });
+
+                      processStream();
+                    })
+                    .catch(function (err) {
+                      closeBtn.disabled = false;
+                      summary.textContent = "Error: " + err.message;
+                    });
+                }
+
+                processStream();
+              })
+              .catch(function (err) {
+                closeBtn.disabled = false;
+                summary.textContent = "Error: " + err.message;
+              });
+
+            function updateBulkStatus(data) {
+              if (data.status === "complete") {
+                closeBtn.disabled = false;
+                progressBar.style.width = "100%";
+                summary.textContent =
+                  "Complete! Delivered: " +
+                  delivered +
+                  " | Failed: " +
+                  failed +
+                  " | Total: " +
+                  total;
+                return;
+              }
+
+              var idx = data.index;
+              var item = document.getElementById("bulk-item-" + idx);
+              if (!item) return;
+
+              var iconMap = {
+                preparing: "\u23f3",
+                sending: "\ud83d\udce4",
+                delivered: "\u2705",
+                failed: "\u274c",
+              };
+              var labelMap = {
+                preparing: "Preparing",
+                sending: "Sending",
+                delivered: "Delivered",
+                failed: "Failed",
+              };
+
+              var icon = item.querySelector(".bulk-status-icon");
+              var badge = item.querySelector(".bulk-status-badge");
+
+              icon.className = "bulk-status-icon " + data.status;
+              icon.textContent = iconMap[data.status] || "\u23f3";
+              badge.className = "bulk-status-badge " + data.status;
+              badge.textContent = labelMap[data.status] || data.status;
+
+              if (data.status === "delivered") {
+                delivered++;
+                badge.textContent =
+                  "Delivered (" + data.phone + ") - Successfully";
+              } else if (data.status === "failed") {
+                failed++;
+                if (data.error_code === "check-number") {
+                  badge.textContent = "Check the number";
+                } else {
+                  var stepPrefix = data.step ? "(" + data.step + ") " : "";
+                  badge.textContent =
+                    "Failed" +
+                    (data.error
+                      ? ": " + stepPrefix + data.error.substring(0, 80)
+                      : "");
+                }
+              } else if (data.step) {
+                badge.textContent = labelMap[data.status] + " - " + data.step;
+              }
+
+              var progress = ((delivered + failed) / total) * 100;
+              progressBar.style.width = progress + "%";
+              summary.textContent =
+                "Sending... " +
+                (delivered + failed) +
+                "/" +
+                total +
+                " | Delivered: " +
+                delivered +
+                " | Failed: " +
+                failed;
+
+              item.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+          });
+
+        // --- AI Enhance Logic ---
+
+        var aiEnhancedMessage = null;
+        var aiEnhanceBtn = document.getElementById("aiEnhanceBtn");
+        var aiInstructionInput = document.getElementById("aiInstruction");
+        var aiResultBox = document.getElementById("aiResultBox");
+        var aiActions = document.getElementById("aiActions");
+
+        // Preset chips
+        document.querySelectorAll(".ai-preset-chip").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            aiInstructionInput.value = chip.getAttribute("data-prompt");
+            aiEnhanceBtn.click();
+          });
+        });
+
+        aiEnhanceBtn.addEventListener("click", function () {
+          var message = previewBox.textContent;
+          if (!message || message.indexOf("Fill in the fields") === 0) {
+            showToast(
+              "Fill in the form fields first to generate a message.",
+              "error",
+            );
+            return;
+          }
+
+          var instruction = aiInstructionInput.value.trim();
+          aiEnhanceBtn.disabled = true;
+          aiEnhanceBtn.innerHTML =
+            '<div class="spinner" style="display:inline-block;width:14px;height:14px;border-width:2px;"></div> Enhancing...';
+
+          fetch(API_BASE + "/ai-enhance", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: message,
+              instruction: instruction,
+            }),
+          })
+            .then(function (res) {
+              if (!res.ok) {
+                return res.json().then(function (err) {
+                  throw new Error(err.detail || "AI enhancement failed");
+                });
+              }
+              return res.json();
+            })
+            .then(function (data) {
+              aiEnhancedMessage = data.enhanced_message;
+              aiResultBox.textContent = aiEnhancedMessage;
+              aiResultBox.style.display = "block";
+              aiActions.style.display = "flex";
+              aiEnhanceBtn.disabled = false;
+              aiEnhanceBtn.innerHTML = "✨ Enhance";
+              showToast("AI enhanced message ready!", "success");
+            })
+            .catch(function (err) {
+              aiEnhanceBtn.disabled = false;
+              aiEnhanceBtn.innerHTML = "✨ Enhance";
+              showToast("AI Error: " + err.message, "error");
+            });
+        });
+
+        // Use AI message — override the preview and the message that gets sent/copied
+        document
+          .getElementById("aiUseBtn")
+          .addEventListener("click", function () {
+            if (aiEnhancedMessage) {
+              previewBox.textContent = aiEnhancedMessage;
+              previewBox.dataset.aiOverride = aiEnhancedMessage;
+              aiResultBox.style.display = "none";
+              aiActions.style.display = "none";
+              showToast(
+                "AI message applied! It will be sent/copied.",
+                "success",
+              );
+            }
+          });
+
+        // Discard AI message
+        document
+          .getElementById("aiDiscardBtn")
+          .addEventListener("click", function () {
+            aiEnhancedMessage = null;
+            aiResultBox.style.display = "none";
+            aiActions.style.display = "none";
+            delete previewBox.dataset.aiOverride;
+            updatePreview();
+          });
+
+        // Close modal
+        document
+          .getElementById("closeBulkModal")
+          .addEventListener("click", function () {
+            document.getElementById("bulkModalOverlay").className =
+              "bulk-modal-overlay";
+          });
 
         // Initial preview
         updatePreview();

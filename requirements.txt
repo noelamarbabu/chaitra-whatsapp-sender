@@ -2,3 +2,7 @@ fastapi
 uvicorn
 playwright
 openpyxl
+python-multipart
+google-generativeai
+groq
+python-dotenv
